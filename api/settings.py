@@ -47,8 +47,12 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     'drf_yasg',
+    # auth
+    "management.apps.ManagementConfig",
     # custom apps
-    "management.apps.ManagementConfig"
+    'land_piece',
+    'structure',
+    'container'
 ]
 
 MIDDLEWARE = [

@@ -30,6 +30,10 @@ urlpatterns = [
     path("api/token/", ObtainTokenView.as_view(), name="obtain_token"),
     path("api/", include("management.urls")),  # password change etc.
     path("api/management/", include("management.api.urls")),
+    # application endpoints
+    path('api/',include('land_piece.urls')),
+    path('api/',include('structure.urls')),
+    path('api/',include('container.urls'))
 ]
 # API Doc (open api)
 if settings.DEBUG == False:
