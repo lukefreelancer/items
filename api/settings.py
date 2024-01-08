@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     # custom apps
     'land_piece',
     'structure',
-    'container'
+    'container',
+    'item'
 ]
 
 MIDDLEWARE = [

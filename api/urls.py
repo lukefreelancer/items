@@ -33,7 +33,8 @@ urlpatterns = [
     # application endpoints
     path('api/',include('land_piece.urls')),
     path('api/',include('structure.urls')),
-    path('api/',include('container.urls'))
+    path('api/',include('container.urls')),
+    path('api/',include('item.urls'))
 ]
 # API Doc (open api)
 if settings.DEBUG == False:
