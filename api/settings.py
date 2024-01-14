@@ -165,8 +165,6 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "management.authentication.JWTAuthentication",
-        'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication'
     ],
     # "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     # "PAGE_SIZE": 20,
@@ -176,7 +174,14 @@ JWT_CONF = {"TOKEN_LIFETIME_HOURS": 5}
 
 CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
 
-WAGGER_SETTINGS = {
+SWAGGER_SETTINGS = {
+'SECURITY_DEFINITIONS': {
+        'api_key': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization'
+        }
+    },
     "exclude_namespaces": [], # List URL namespaces to ignore
     "api_version": '0.1',  # Specify your API's version
     "api_path": "/",  # Specify the path to your API not a root level
@@ -191,6 +196,7 @@ WAGGER_SETTINGS = {
     "is_authenticated": False,  # Set to True to enforce user authentication,
     "is_superuser": False,  # Set to True to enforce admin only access
 }
+
 
 
 # EMAIL_BACKEND = "anymail.backends.amazon_ses.EmailBackend"
