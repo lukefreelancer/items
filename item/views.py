@@ -6,9 +6,11 @@ from .models import Item
 from .serializers import ItemSerializer
 from rest_framework.parsers import MultiPartParser, FormParser
 from drf_yasg.utils import swagger_auto_schema
+from rest_framework.permissions import IsAuthenticated
 
 class ItemView(APIView):
     parser_classes = (MultiPartParser, FormParser)
+    permission_classes = [IsAuthenticated]
     def get(self, request):
         tasks = Item.objects.all()
         serializer = ItemSerializer(tasks, many=True)

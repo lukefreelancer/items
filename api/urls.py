@@ -15,12 +15,27 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,  include
+from django.urls import path, include, re_path
 from rest_framework.schemas import get_schema_view
 from django.conf import settings
 from django.conf.urls.static import static
 
 from management.api.views import ObtainTokenView, HealthCheckView
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+schema_view = get_schema_view(
+    openapi.Info(
+        #  add your swagger doc title
+        title="Showroom API",
+        #  version of the swagger doc
+        default_version='v1',
+        # first line that appears on the top of the doc
+        description="Test description",
+    ),
+    public=True,
+)
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -34,24 +49,26 @@ urlpatterns = [
     path('api/',include('land_piece.urls')),
     path('api/',include('structure.urls')),
     path('api/',include('container.urls')),
-    path('api/',include('item.urls'))
+    path('api/',include('item.urls')),
+    re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui')
 ]
 # API Doc (open api)
-if settings.DEBUG == False:
-    urlpatterns += (
-        path(
-            "api/docs/",
-            get_schema_view(
-                title=settings.APP_NAME,
-                description="API Documentation",
-                version="1.0.0",
-                patterns=[
-                    path("api/", include("web.api.urls")),
-                    path("api/token/", ObtainTokenView.as_view()),
-                ],
-            ),
-            name="openapi-schema",
-        ),
-    )
+# if settings.DEBUG == True:
+#     urlpatterns += (
+#         path(
+#             "api/docs/",
+#             get_schema_view(
+#                 title=settings.APP_NAME,
+#                 description="API Documentation",
+#                 version="1.0.0",
+#                 patterns=[
+#                     path("api/", include("api.urls")),
+#                     path("api/token/", ObtainTokenView.as_view()),
+#                     path('api/',include('item.urls'))
+#                 ],
+#             ),
+#             name="openapi-schema",
+#         ),
+#     )
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
