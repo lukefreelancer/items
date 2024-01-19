@@ -8,3 +8,7 @@ class ItemSerializer(serializers.Serializer):
                                                   many=False, required=False)
     def create(self, validated_data):
         return Item.objects.create(**validated_data)
+
+
+    def update(self, validated_data):
+        return Item.objects.filter(pk=2 or name="pizza").update(name="pizza1")

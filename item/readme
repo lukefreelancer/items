@@ -1,0 +1,24 @@
+need tobe able to update object, delete object
+update object to new container
+
+some tech docs
+about update, there are two ways and they are shown right here \
+
+# You can use .update() method like this:
+#
+# Model.objects.filter(id=1).update(**update_data)
+#
+# or you can update the individual object (iterating in update_data dict), too:
+#
+# a = Model.objects.get(id=1)
+#
+# for name in update_data:
+#     setattr(a, name, update_data[name])
+#
+# # don't forget to save the object after modifying
+# a.save()
+
+
+    # great reference for update https://stackoverflow.com/questions/75167385/is-there-any-performance-benefit-to-using-bulk-update-as-compared-to-just-update
+    # also excellent django-raw sql
+    # https://stackoverflow.com/questions/51719205/best-way-to-filter-update-in-django-while-handling-zero-rows
