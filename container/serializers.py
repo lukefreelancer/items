@@ -11,3 +11,16 @@ class ContainerSerializer(serializers.Serializer):
                                                   many=False, required=False)
     def create(self, validated_data):
         return Container.objects.create(**validated_data)
+
+    def update(self, validated_data, id):
+        a = Container.objects.get(pk=id)
+        a.title=validated_data["title"] or a.title
+        structure = Structure.objects.get(pk=validated_data["structure"])
+        a.structure= structure
+        a.save()
+        return a
+
+    def delete(self, validated_data):
+        snippet = Container.objects.get(pk=1)
+        snippet.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

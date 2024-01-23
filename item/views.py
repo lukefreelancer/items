@@ -13,8 +13,17 @@ class ItemView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        tasks = Item.objects.all()
-        serializer = ItemSerializer(tasks, many=True)
+        id = request.query_params.get('id')
+        if id:
+            try:
+                result = Item.objects.get(pk=id)
+                serializer = ItemSerializer(result)
+            except Item.DoesNotExist:
+                return Response(status=status.HTTP_400_BAD_REQUEST)
+        else:
+            result = Item.objects.all()
+            serializer = ItemSerializer(result, many=True)
+
         return Response(serializer.data)
 
     @swagger_auto_schema(request_body=ItemSerializer)
@@ -30,7 +39,12 @@ class ItemView(APIView):
     def put(self, request):
         serializer = ItemSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.update()
+            serializer.update(serializer.data,request.data["id"])
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @swagger_auto_schema(request_body=ItemSerializer)
+    def delete(self, request):
+        snippet = Item.objects.get(pk=request.data["id"])
+        snippet.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

@@ -11,3 +11,16 @@ class StructureSerializer(serializers.Serializer):
                                                   many=False, required=False)
     def create(self, validated_data):
         return Structure.objects.create(**validated_data)
+
+    def update(self, validated_data, id):
+        a = Structure.objects.get(pk=id)
+        a.title = validated_data["title"] or a.title
+        land_piece = LandPiece.objects.get(pk=validated_data["land_piece"])
+        a.land_piece = land_piece
+        a.save()
+        return a
+
+    def delete(self, validated_data):
+        snippet = Structure.objects.get(pk=1)
+        snippet.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
