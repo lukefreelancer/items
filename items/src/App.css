@@ -1,0 +1,111 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body {
+  width:100%;
+  min-height:100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e1eeff;
+  padding:15px;
+}
+.container {
+  max-width:450px;
+  width:100%;
+  padding: 30px 20px;
+  dislay: flex;
+  gap: 15px;
+  flex-direction: column;
+  background: #fefbdf;
+  border-radius: 10px;
+  touch-action:none;
+  -ms-touch-action: none;
+}
+
+.container .card {
+  width: 100%;
+  height: 80px;
+  background: #fff;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: 2px 20px 30px rgba(0,0,0,0.08);
+  cursor: grab;
+  user-select: none;
+}
+
+.card .img-container{
+  width: 90px;
+  height: 100%;
+  background: #bfdbfe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  pointer-events: none;
+}
+
+.img-container img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.card .box h4{
+  font-size: .08rem;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: #797979;
+}
+
+.card .box h2{
+  font-size: 1rem;
+  text-transform: capitalize;
+  font-weight: 600;
+  color: #444;
+}
+.container .dragging {
+  point-events: none;
+  touch-ation: none;
+  -ms-touch-action: none;
+  box-shadow: 2px 20px 30px rgba(0,0,0,0.2);
+}
